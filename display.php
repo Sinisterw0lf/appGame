@@ -40,7 +40,7 @@ if (!empty($_GET["id"]) && is_numeric($_GET["id"])) {
 ?>
 
 <div class="pt-16 wrap-content ">
-    <div class="wrap-content-head text-center">
+    <div class="wrap-content-head text-center space-y-5">
         <h1 class="text-info text-5xl uppercase font-black"><?= $game["name"] ?></h1>
         <div class="flex space-x-5 justify-center">
             <p class="pt-4"><?= $game["plateforms"] ?></p>
@@ -49,7 +49,7 @@ if (!empty($_GET["id"]) && is_numeric($_GET["id"])) {
             <p class="pt-4 font-bold text-success"><?= $game["price"] ?>€</p>
         </div>
         <p class="pt-4"><?= $game["description"] ?></p>
-
+        <a href="delete.php?id=<?= $game["id"] ?>&name=<?= $game["name"] ?>" class="btn btn-warning ">Supprimer le jeu</a>
 
     </div>
 </div>
