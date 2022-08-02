@@ -5,4 +5,7 @@ function debug_array($arr)
     print_r($arr);
     echo "</pre>";
 }
-?>
+
+function clear_xss($var) {
+   return trim(htmlspecialchars($var));
+}

@@ -1,5 +1,6 @@
 <!-- header -->
 <?php
+session_start();
 $title = "Home"; //Title for current page
 include('partials/_header.php'); //include helper
 include('helpers/functions.php'); //include function
@@ -15,13 +16,25 @@ $query->execute();
 $games = $query->fetchAll();
 //debug_array($games);
 
-
 ?>
 <!-- main content -->
 <div class="pt-16 wrap-content">
     <div class="wrap-content-head text-center">
         <h1 class="text-info text-5xl uppercase font-black">AppGame</h1>
         <p>L'app qui répertorie vos jeux</p>
+       <?php 
+       if ($_SESSION["error"]) { ?>
+        <div class="bg-error-content py-6 text-white">
+            <?= $_SESSION["error"] ?>
+        </div>
+      <?php } else{
+        echo "";
+      }
+      //je vide ma variable $_SESSION["error"] pour qu'il n'affiche pas de message en créant un array vide
+      $_SESSION["error"] = [];
+       ?> 
+       
+        </div>
         <!--<button class="btn btn-primary">Click me !</button>-->
     </div>
     <!-- Table -->
@@ -54,7 +67,7 @@ $games = $query->fetchAll();
                             <td><?= $game["price"] ?></td>
                             <td><?= $game["PEGI"] ?></td>
                             <td>
-                                <a href="display.php">
+                                <a href="display.php?id=<?= $game["id"] ?>&name=<?= $game["name"] ?>">
                                     <img src="assets/img/loupe.png" alt="loupe" class="w-4">
                                 </a>
                             </td>
