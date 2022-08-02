@@ -1,15 +1,21 @@
 <!-- header -->
 <?php
 $title = "Home"; //Title for current page
-include('partials/_header.php');
+include('partials/_header.php'); //include helper
+include('helpers/functions.php'); //include function
 //inclure PDO pour la connexion à la BDO
 require_once("helpers/pdo.php");
 //1- recup les jeux - Query for get all games
 $sql = "SELECT * FROM jeux";
 //2 - Préparer la requete
 $query = $pdo->prepare($sql);
+
+$query->execute();
 //3 - Stocke le résultat dans une variable
-$games = $query->fetchAll()
+$games = $query->fetchAll();
+debug_array($games);
+//$games = [];
+
 ?>
 <!-- main content -->
 <div class="pt-16 wrap-content">
@@ -34,20 +40,28 @@ $games = $query->fetchAll()
                 </tr>
             </thead>
             <tbody>
-                <!-- row 1 -->
-                <tr>
-                    <th>1</th>
-                    <td>Fire Emblem : Sacred Stones</td>
-                    <td>Tactical-RPG</td>
-                    <td>Gameboy Advance </td>
-                    <td>15</td>
-                    <td>3</td>
-                    <td>
-                        <a href="display.php">
-                            <img src="assets/img/loupe.png" alt="loupe" class="w-4">
-                        </a>
-                    </td>
-                </tr>
+                <?php
+                if (count($games) == 0) {
+                    echo "<tr><td class=text-center>Pas de jeux disponibles actuellement</td></tr>";
+                } else { ?>
+                    <?php foreach ($games as $game) : ?>
+                        <!-- row 1 -->
+                        <tr>
+                            <th>1</th>
+                            <td>Fire Emblem : Sacred Stones</td>
+                            <td>Tactical-RPG</td>
+                            <td>Gameboy Advance </td>
+                            <td>15</td>
+                            <td>3</td>
+                            <td>
+                                <a href="display.php">
+                                    <img src="assets/img/loupe.png" alt="loupe" class="w-4">
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                <?php }
+                ?>
             </tbody>
         </table>
     </div>
