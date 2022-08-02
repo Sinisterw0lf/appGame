@@ -32,7 +32,8 @@ if (!empty($_GET["id"]) && is_numeric($_GET["id"])) {
     } else {
     }
 } else {
-    echo "URL invalide";
+    $_SESSION["error"] = "URL invalide !";
+    header("Location: index.php");
 }
 
 
