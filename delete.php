@@ -1,6 +1,6 @@
 <?php
 //start session
-session_name();
+session_start();
 include('helpers/functions.php'); //include function
 //inclure PDO pour la connexion à la BDO
 //1- Connexion BDD
