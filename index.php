@@ -13,8 +13,8 @@ $query = $pdo->prepare($sql);
 $query->execute();
 //3 - Stocke le résultat dans une variable
 $games = $query->fetchAll();
-debug_array($games);
-//$games = [];
+//debug_array($games);
+
 
 ?>
 <!-- main content -->
@@ -47,12 +47,12 @@ debug_array($games);
                     <?php foreach ($games as $game) : ?>
                         <!-- row 1 -->
                         <tr>
-                            <th>1</th>
-                            <td>Fire Emblem : Sacred Stones</td>
-                            <td>Tactical-RPG</td>
-                            <td>Gameboy Advance </td>
-                            <td>15</td>
-                            <td>3</td>
+                            <th><?= $game["id"] ?></th>
+                            <td><?= $game["name"] ?></td>
+                            <td><?= $game["genre"] ?></td>
+                            <td><?= $game["plateforms"] ?></td>
+                            <td><?= $game["price"] ?></td>
+                            <td><?= $game["PEGI"] ?></td>
                             <td>
                                 <a href="display.php">
                                     <img src="assets/img/loupe.png" alt="loupe" class="w-4">
