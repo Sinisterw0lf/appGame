@@ -6,3 +6,4 @@
 6 - Je crée mon projet PHP 
 7 - Je code mes templates 
 8 - Je me connecte à ma base de données
+9 - Récuperer les données de la BDD

@@ -2,6 +2,14 @@
 <?php
 $title = "Home"; //Title for current page
 include('partials/_header.php');
+//inclure PDO pour la connexion à la BDO
+require_once("helpers/pdo.php");
+//1- recup les jeux - Query for get all games
+$sql = "SELECT * FROM jeux";
+//2 - Préparer la requete
+$query = $pdo->prepare($sql);
+//3 - Stocke le résultat dans une variable
+$games = $query->fetchAll()
 ?>
 <!-- main content -->
 <div class="pt-16 wrap-content">
@@ -34,7 +42,11 @@ include('partials/_header.php');
                     <td>Gameboy Advance </td>
                     <td>15</td>
                     <td>3</td>
-                    <td><img src="assets/img/loupe.png" alt="loupe" class="w-4"></td>
+                    <td>
+                        <a href="display.php">
+                            <img src="assets/img/loupe.png" alt="loupe" class="w-4">
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>
