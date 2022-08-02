@@ -22,19 +22,30 @@ $games = $query->fetchAll();
     <div class="wrap-content-head text-center">
         <h1 class="text-info text-5xl uppercase font-black">AppGame</h1>
         <p>L'app qui répertorie vos jeux</p>
-       <?php 
-       if ($_SESSION["error"]) { ?>
-        <div class="bg-error-content py-6 text-white">
-            <?= $_SESSION["error"] ?>
-        </div>
-      <?php } else{
-        echo "";
-      }
-      //je vide ma variable $_SESSION["error"] pour qu'il n'affiche pas de message en créant un array vide
-      $_SESSION["error"] = [];
-       ?> 
-       
-        </div>
+        <?php
+        if ($_SESSION["error"]) { ?>
+            <div class="bg-error-content py-6 text-white">
+                <?= $_SESSION["error"] ?>
+            </div>
+        <?php } else {
+            echo "";
+        }
+
+        //je vide ma variable $_SESSION["error"] pour qu'il n'affiche pas de message en créant un array vide
+        $_SESSION["error"] = [];
+        ?>
+        <?php
+        if ($_SESSION["success"]) { ?>
+            <div class="bg-success-content py-6 text-white">
+                <?= $_SESSION["success"] ?>
+            </div>
+        <?php } else {
+            echo "";
+        }
+
+        //je vide ma variable $_SESSION["error"] pour qu'il n'affiche pas de message en créant un array vide
+        $_SESSION["success"] = [];
+        ?>
         <!--<button class="btn btn-primary">Click me !</button>-->
     </div>
     <!-- Table -->
