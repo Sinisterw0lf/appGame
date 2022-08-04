@@ -21,7 +21,7 @@ if (!empty($_GET["id"]) && is_numeric($_GET["id"])) {
     $query->bindValue(":id", $id, PDO::PARAM_INT);
     //6- Execute la query
     $query->execute();
-    //7- Stockke tous dans une variable
+    //7- Stocke tous dans une variable
     $game = $query->fetch();
     //debug_array($game);
     // $game = [];

@@ -9,3 +9,10 @@ function debug_array($arr)
 function clear_xss($var) {
    return trim(htmlspecialchars($var));
 }
+
+function clear_xss_array($arrs){
+    return $assAR=[];
+    foreach ($arrs as $arr) {
+        $assAR = htmlspecialchars($arr);
+    }
+}
