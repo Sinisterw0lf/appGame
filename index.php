@@ -22,6 +22,11 @@ $games = $query->fetchAll();
     <div class="wrap-content-head text-center">
         <h1 class="text-info text-5xl uppercase font-black">AppGame</h1>
         <p>L'app qui répertorie vos jeux</p>
+        <div class="pt-5">
+            <a href="addGame.php" class="btn btn-primary">
+                Add game
+            </a>
+        </div>
         <?php
         if ($_SESSION["error"]) { ?>
             <div class="bg-error-content py-6 text-white">
@@ -31,12 +36,12 @@ $games = $query->fetchAll();
             <div class="bg-success-content py-6 text-white">
                 <?= $_SESSION["success"] ?>
             </div>
-        <?php } 
+        <?php }
         //je vide ma variable $_SESSION["error"] pour qu'il n'affiche pas de message en créant un array vide
         $_SESSION["error"] = [];
         $_SESSION["success"] = [];
         ?>
-        
+
         <!--<button class="btn btn-primary">Click me !</button>-->
     </div>
     <!-- Table -->
