@@ -25,6 +25,7 @@ if (!empty($_POST["submitted"])) {
 ?>
 
 <section class="py-12">
+    <a href="index.php" class="text-blue-500"><- retour</a>
     <div class="text-center space-y-5">
         <h1 class="text-info text-5xl uppercase font-black">Ajouter un jeu</h1>
     </div>
@@ -155,13 +156,15 @@ if (!empty($_POST["submitted"])) {
             <select name="pegi" class="select select-bordered w-full max-w-xs">
                 <option disabled selected>Le PEGI de votre jeu</option>
                 <?php foreach ($pegiArray as $pegi) : ?>
-                    <option value="<?= $pegi["name"] ?>" <?php
+                    <option value="<?= $pegi["name"] ?>" 
+                    <?php
                                                             if (!empty($_POST["pegi"])) {
-                                                                if (($_POST["pegi"]) == $pegi) {
+                                                                if (($_POST["pegi"]) == $pegi["name"])
                                                                     echo 'selected="selected"';
-                                                                };
                                                             }
-                                                            ?>><?= $pegi["name"] ?></option>
+                                                            ?>
+                                                            >
+                                                            <?= $pegi["name"] ?></option>
 
                 <?php endforeach ?>
             </select>
