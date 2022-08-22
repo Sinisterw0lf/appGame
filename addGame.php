@@ -15,7 +15,7 @@ if (!empty($_POST["submitted"])) {
     //echo "Tu as cliqué";
     //2- faille xss
     require_once("validation-formulaire/include.php");
-    debug_array($_POST);
+    //debug_array($_POST);
     //3- validation de chaque input
     if (count($error) == 0) {
         $success = true;
@@ -71,17 +71,19 @@ if (!empty($_POST["submitted"])) {
                     <label>
                         <?= $genre["name"] ?>
                     </label>
-                    <input type="checkbox" class="checkbox" name='genre[]' value="<?= $genre["name"] ?>" <?= !empty($genre["checked"]) ? "checked" : ""; ?> />
+                    <input type="checkbox" class="checkbox" name='genre[]' value="<?= $genre["name"] ?>" <?php if (!empty($_POST["genre"])) {
+                                                                                                                if (in_array($genre["name"], $_POST["genre"])) echo "checked";
+                                                                                                            } ?> />
 
                 </div>
             <?php endforeach ?>
-            
+
         </div>
         <p>
-                <?php if (!empty($error["genre"])) {
-                    echo $error["genre"];
-                }
-                ?></p>
+            <?php if (!empty($error["genre"])) {
+                echo $error["genre"];
+            }
+            ?></p>
         <!-- input for note -->
         <div class="py-5">
             <label class="font-bold" for="note">Note : </label>
@@ -114,17 +116,19 @@ if (!empty($_POST["submitted"])) {
                     <label>
                         <?= $plateform["name"] ?>
                     </label>
-                    <input type="checkbox" class="checkbox" name='plateforms[]' value="<?= $plateform["name"] ?>" <?= !empty($plateform["checked"]) ? "checked" : ""; ?> />
+                    <input type="checkbox" class="checkbox" name='plateforms[]' value="<?= $plateform["name"] ?>" <?php if (!empty($_POST["plateforms"])) {
+                                                                                                                        if (in_array($plateform["name"], $_POST["plateforms"])) echo "checked";
+                                                                                                                    } ?> />
 
                 </div>
             <?php endforeach ?>
-            
+
         </div>
         <p>
-                <?php if (!empty($error["plateforms"])) {
-                    echo $error["plateforms"];
-                }
-                ?></p>
+            <?php if (!empty($error["plateforms"])) {
+                echo $error["plateforms"];
+            }
+            ?></p>
         <!-- input for description -->
         <div class="py-5 ">
             <label class="font-bold" for="description">Description : </label>
