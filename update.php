@@ -1,0 +1,44 @@
+<?php
+//start session
+session_start();
+$title = "Modifier le jeu"; //Title for current page
+include('partials/_header.php');
+include('helpers/functions.php'); //include function
+//inclure PDO pour la connexion à la BDO
+require_once("helpers/pdo.php");
+//debug_array($_GET);
+
+//1-verifier recup id jeu
+//on verifie que l'id existe (donc pas vide) et qu'il est numérique 
+if (!empty($_GET["id"]) && is_numeric($_GET["id"])) {
+    //2-nettoyer id contre xss
+    $id = clear_xss($_GET["id"]);
+    //3-faire la query vers la BDD
+    $sql = "SELECT * FROM jeux WHERE id=:id";
+    //4- Preparation requete
+    $query = $pdo->prepare($sql);
+    //5- Securise la query contre injection SQL
+    $query->bindValue(":id", $id, PDO::PARAM_INT);
+    //6- Execute la query
+    $query->execute();
+    //7- Stocke tous dans une variable
+    $game = $query->fetch();
+    //debug_array($game);
+    // $game = [];
+
+    if (!$game) {
+        $_SESSION["error"] = "Ce jeu n'est pas disponible !";
+        header("Location: index.php");
+    } else {
+    }
+} else {
+    $_SESSION["error"] = "URL invalide !";
+    header("Location: index.php");
+}
+?>
+
+<div class="pt-16">
+    <a href="display.php?id=<?= $game["id"] ?>&name=<?= $game["name"] ?>" class="text-blue-500">
+        <- retour</a>
+            Modifier
+</div>

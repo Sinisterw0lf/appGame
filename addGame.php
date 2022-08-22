@@ -18,7 +18,7 @@ if (!empty($_POST["submitted"])) {
     //debug_array($_POST);
     //3- validation de chaque input
     if (count($error) == 0) {
-        $success = true;
+        require_once("sql/addGameSQL.php");
         //inscription en BS
     }
 }

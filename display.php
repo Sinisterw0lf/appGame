@@ -40,18 +40,24 @@ if (!empty($_GET["id"]) && is_numeric($_GET["id"])) {
 ?>
 
 <div class="pt-16 wrap-content ">
-    <div class="wrap-content-head text-center space-y-5">
-        <h1 class="text-info text-5xl uppercase font-black"><?= $game["name"] ?></h1>
-        <div class="flex space-x-5 justify-center">
-            <p class="pt-4"><?= $game["plateforms"] ?></p>
-            <p class="pt-4"><?= $game["genre"] ?></p>
-            <p class="pt-4"><?= $game["note"] ?>/20</p>
-            <p class="pt-4 font-bold text-success"><?= $game["price"] ?>€</p>
-        </div>
-        <p class="pt-4"><?= $game["description"] ?></p>
-        <a href="delete.php?id=<?= $game["id"] ?>&name=<?= $game["name"] ?>" class="btn btn-warning ">Supprimer le jeu</a>
+    <a href="index.php" class="text-blue-500">
+        <- retour</a>
+            <div class="wrap-content-head text-center space-y-5">
+                <h1 class="text-info text-5xl uppercase font-black"><?= $game["name"] ?></h1>
+                <div class="flex space-x-5 justify-center">
+                    <p class="pt-4"><?= $game["plateforms"] ?></p>
+                    <p class="pt-4"><?= $game["genre"] ?></p>
+                    <p class="pt-4"><?= $game["note"] ?>/20</p>
+                    <p class="pt-4 font-bold text-success"><?= $game["price"] ?>€</p>
+                </div>
+                <p class="pt-4"><?= $game["description"] ?></p>
+                <div>
+                    <!-- <a href="delete.php?id=<?= $game["id"] ?>&name=<?= $game["name"] ?>" class="btn btn-warning ">Supprimer le jeu</a> -->
+                    <a href="update.php?id=<?= $game["id"] ?>&name=<?= $game["name"] ?>" class="btn btn-info ">Modifier le jeu</a>
+                    <?php include("partials/_modal.php") ?>
+                </div>
 
-    </div>
+            </div>
 </div>
 
 <?php include('partials/_footer.php') ?>
