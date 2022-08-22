@@ -13,4 +13,11 @@ $query->bindValue(':note', $note, PDO::PARAM_STMT);
 $query->bindValue(':plateforms', implode("|", $plateform_clear), PDO::PARAM_STR);
 $query->bindValue(':description', $description, PDO::PARAM_STR);
 $query->bindValue(':PEGI', $pegi, PDO::PARAM_STR);
+
+//4-Executer la requete
+$query->execute();
+
+//5-Retour sur la page d'accueil
+$_SESSION["success"] = "Le jeu a été ajouté avec succes !";
+header("Location: index.php");
 ?>
