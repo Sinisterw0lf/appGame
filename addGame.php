@@ -62,7 +62,7 @@ if (!empty($_POST["submitted"])) {
             ["name" => "Aventure"],
             ["name" => "Roguelike",],
             ["name" => "Infiltration",],
-        ]
+        ];
 
         ?>
         <div class="mt-5 flex space-x-6">
@@ -107,7 +107,7 @@ if (!empty($_POST["submitted"])) {
             ["name" => "Playstation 2",],
             ["name" => "Gameboy Advance",],
             ["name" => "Playstation",],
-        ]
+        ];
 
         ?>
         <div class="mt-5 flex space-x-6">

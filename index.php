@@ -7,7 +7,7 @@ include('helpers/functions.php'); //include function
 //inclure PDO pour la connexion à la BDO
 require_once("helpers/pdo.php");
 //1- recup les jeux - Query for get all games
-$sql = "SELECT * FROM jeux";
+$sql = "SELECT * FROM jeux ORDER BY name";
 //2 - Préparer la requete
 $query = $pdo->prepare($sql);
 
@@ -28,6 +28,8 @@ $games = $query->fetchAll();
             </a>
         </div>
         <?php
+        $_SESSION["error"] = [];
+        $_SESSION["success"] = [];
         if ($_SESSION["error"]) { ?>
             <div class="bg-error-content py-6 text-white">
                 <?= $_SESSION["error"] ?>
@@ -57,18 +59,20 @@ $games = $query->fetchAll();
                     <th>Prix</th>
                     <th>PEGI</th>
                     <th>Voir</th>
+                    <th>Supprimer</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
+                $index = 1;
                 if (count($games) == 0) {
                     echo "<tr><td class=text-center>Pas de jeux disponibles actuellement</td></tr>";
                 } else { ?>
                     <?php foreach ($games as $game) : ?>
                         <!-- row 1 -->
-                        <tr>
-                            <th><?= $game["id"] ?></th>
-                            <td><?= $game["name"] ?></td>
+                        <tr class="hover:text-blue-500">
+                            <th class="text-red-400"><?= $index++ ?></th>
+                            <td> <a class="text-blue-700 " href="display.php?id=<?= $game["id"] ?>&name=<?= $game["name"] ?>"><?= $game["name"] ?></a></td>
                             <td><?= $game["genre"] ?></td>
                             <td><?= $game["plateforms"] ?></td>
                             <td><?= $game["price"] ?></td>
@@ -78,6 +82,7 @@ $games = $query->fetchAll();
                                     <img src="assets/img/loupe.png" alt="loupe" class="w-4">
                                 </a>
                             </td>
+                            <td><?php include("partials/_modal.php") ?></td>
                         </tr>
                     <?php endforeach ?>
                 <?php }
