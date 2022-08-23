@@ -7,7 +7,9 @@ include('helpers/functions.php'); //include function
 //inclure PDO pour la connexion à la BDO
 require_once("helpers/pdo.php");
 //debug_array($_GET);
-
+$error = [];
+$errorMessage  = "<span class=text-red-500>* Ce champ est obligatoire ! </span>";
+$success = false;
 //1-verifier recup id jeu
 //on verifie que l'id existe (donc pas vide) et qu'il est numérique 
 if (!empty($_GET["id"]) && is_numeric($_GET["id"])) {
@@ -36,7 +38,7 @@ if (!empty($_GET["id"]) && is_numeric($_GET["id"])) {
     header("Location: index.php");
 }
 //2-Envoie vers la base de donnée
-if(!empty($_POST["submitted"])) {
+if (!empty($_POST["submitted"])) {
     //echo "Tu as cliqué";
     //2- faille xss
     require_once("validation-formulaire/include.php");
@@ -53,7 +55,8 @@ if(!empty($_POST["submitted"])) {
     <a href="display.php?id=<?= $game["id"] ?>&name=<?= $game["name"] ?>" class="text-blue-500">
         <- retour</a>
             <div class="text-center space-y-5">
-                <h1 class="text-info text-5xl uppercase font-black">Modifier un jeu</h1>
+                <?php $main_title = "Modifier un jeu";
+                include("partials/_h1.php") ?>
             </div>
 
 </div>
@@ -88,9 +91,9 @@ if(!empty($_POST["submitted"])) {
             ["name" => "Roguelike",],
             ["name" => "Infiltration",],
         ];
-            // creer un new array avec valeur de BDD avec methode explode
-            $arr_genre = explode("|",$game["genre"]);
-            // debug_array($arr_genre)
+        // creer un new array avec valeur de BDD avec methode explode
+        $arr_genre = explode("|", $game["genre"]);
+        // debug_array($arr_genre)
         ?>
         <div class="mt-5 flex space-x-6">
             <h2 class="font-bold">Genre : </h2>
@@ -99,9 +102,9 @@ if(!empty($_POST["submitted"])) {
                     <label>
                         <?= $genre["name"] ?>
                     </label>
-                    <input type="checkbox" class="checkbox" name='genre[]' value="<?= $genre["name"] ?>" <?php 
-                                                                                                                if (in_array($genre["name"], $arr_genre)) echo "checked";
-                                                                                                             ?> />
+                    <input type="checkbox" class="checkbox" name='genre[]' value="<?= $genre["name"] ?>" <?php
+                                                                                                            if (in_array($genre["name"], $arr_genre)) echo "checked";
+                                                                                                            ?> />
 
                 </div>
             <?php endforeach ?>
@@ -142,7 +145,7 @@ if(!empty($_POST["submitted"])) {
                     <label>
                         <?= $plateform["name"] ?>
                     </label>
-                    <input type="checkbox" class="checkbox" name='plateforms[]' value="<?= $plateform["name"] ?>" <?php  if (in_array($plateform["name"], $arr_platform)) echo "checked"; ?> />
+                    <input type="checkbox" class="checkbox" name='plateforms[]' value="<?= $plateform["name"] ?>" <?php if (in_array($plateform["name"], $arr_platform)) echo "checked"; ?> />
 
                 </div>
             <?php endforeach ?>
@@ -180,7 +183,7 @@ if(!empty($_POST["submitted"])) {
                 <option disabled selected>Le PEGI de votre jeu</option>
                 <?php foreach ($pegiArray as $pegi) : ?>
                     <option value="<?= $pegi["name"] ?>" <?php
-                                                            if($game["PEGI"] == $pegi["name"]) echo 'selected="selected"';
+                                                            if ($game["PEGI"] == $pegi["name"]) echo 'selected="selected"';
                                                             ?>>
                         <?= $pegi["name"] ?></option>
 
@@ -193,7 +196,7 @@ if(!empty($_POST["submitted"])) {
                 ?></p>
         </div>
         <!-- //input id -->
-        <input type="hidden" name="id" value=""<?=$game["id"] ?>>
+        <input type="hidden" name="id" value="" <?= $game["id"] ?>>
         <div>
             <input type="submit" name="submitted" value="Update" class="btn bg-blue-500">
         </div>

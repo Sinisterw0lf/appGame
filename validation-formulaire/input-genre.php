@@ -7,7 +7,7 @@ if (!empty($genre_clear)) {
     //     $error["error"] ="<span class=text-red-500>Valeurs non existantes !</span>";
     // } 
 }else{
-    $error["genre"] = $errorMessage;
+    // $error["genre"] = $errorMessage;
 }
 
 ?>

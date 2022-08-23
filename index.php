@@ -6,43 +6,21 @@ include('partials/_header.php'); //include helper
 include('helpers/functions.php'); //include function
 //inclure PDO pour la connexion à la BDO
 require_once("helpers/pdo.php");
-//1- recup les jeux - Query for get all games
-$sql = "SELECT * FROM jeux ORDER BY name";
-//2 - Préparer la requete
-$query = $pdo->prepare($sql);
 
-$query->execute();
-//3 - Stocke le résultat dans une variable
-$games = $query->fetchAll();
-//debug_array($games);
-
+require_once("sql/selectAllSQL.php");
 ?>
 <!-- main content -->
 <div class="pt-16 wrap-content">
     <div class="wrap-content-head text-center">
-        <h1 class="text-info text-5xl uppercase font-black">AppGame</h1>
+        <?php $main_title = "App Game";
+        include("partials/_h1.php") ?>
         <p>L'app qui répertorie vos jeux</p>
         <div class="pt-5">
             <a href="addGame.php" class="btn btn-primary">
                 Add game
             </a>
         </div>
-        <?php
-        $_SESSION["error"] = [];
-        $_SESSION["success"] = [];
-        if ($_SESSION["error"]) { ?>
-            <div class="bg-error-content py-6 text-white">
-                <?= $_SESSION["error"] ?>
-            </div>
-        <?php } elseif ($_SESSION["success"]) { ?>
-            <div class="bg-success-content py-6 text-white">
-                <?= $_SESSION["success"] ?>
-            </div>
-        <?php }
-        //je vide ma variable $_SESSION["error"] pour qu'il n'affiche pas de message en créant un array vide
-        $_SESSION["error"] = [];
-        $_SESSION["success"] = [];
-        ?>
+        <?php require_once("partials/_alert.php") ?>
 
         <!--<button class="btn btn-primary">Click me !</button>-->
     </div>
@@ -82,7 +60,7 @@ $games = $query->fetchAll();
                                     <img src="assets/img/loupe.png" alt="loupe" class="w-4">
                                 </a>
                             </td>
-                            <td><?php include("partials/_modal.php") ?></td>
+                            <td><?= include("partials/_modal.php")?></td>
                         </tr>
                     <?php endforeach ?>
                 <?php }

@@ -1,0 +1,1 @@
+<h1 class="text-info text-5xl uppercase font-black"><?=$main_title?></h1>
