@@ -44,6 +44,13 @@ if (!empty($_GET["id"]) && is_numeric($_GET["id"])) {
         <- retour</a>
             <div class="wrap-content-head text-center space-y-5">
                 <h1 class="text-info text-5xl uppercase font-black"><?= $game["name"] ?></h1>
+                <div class="flex justify-center">
+                <?php
+                if ($game["url_img"] != null) { ?>
+                    <img class="" src="<?= $game["url_img"] ?>" alt="">
+                <?php }
+                ?>
+                </div>
                 <div class="flex space-x-5 justify-center">
                     <p class="pt-4"><?= $game["plateforms"] ?></p>
                     <p class="pt-4"><?= $game["genre"] ?></p>

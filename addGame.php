@@ -9,7 +9,7 @@ $error = [];
 $errorMessage  = "<span class=text-red-500>* Ce champ est obligatoire ! </span>";
 $success = false;
 //1- Je vérifie que le bouton submit fonctionne en affichant un message echo "Tu as cliqué"
-if (!empty($_POST["submitted"])) {
+if (!empty($_POST["submitted"]) && isset($_FILES["url_img"]) && $_FILES["url_img"]["error"] == 0) {
     //echo "Tu as cliqué";
     //2- faille xss
     require_once("validation-formulaire/include.php");
@@ -28,10 +28,10 @@ if (!empty($_POST["submitted"])) {
                 <?php $main_title = "Ajouter un jeu";
                 include("partials/_h1.php") ?>
             </div>
-            <form action="" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">
                 <!-- input for name -->
                 <div class="py-5">
-                    <label class="font-bold" for="name">Name : </label>
+                    <label class="font-bold text-blue-800" for="name">Name : </label>
                     <input type="text" name="name" class="input input-bordered w-full max-w-xs block" value="<?php if (!empty($_POST["name"])) {
                                                                                                                     echo $_POST["name"];
                                                                                                                 } ?>">
@@ -43,7 +43,7 @@ if (!empty($_POST["submitted"])) {
                 </div>
                 <!-- input for price -->
                 <div class="py-5">
-                    <label class="font-bold" for="price">Price : </label>
+                    <label class="font-bold text-blue-800" for="price">Price : </label>
                     <input type="number" step="0.01" name="price" class="input input-bordered w-full max-w-xs block" value="<?php if (!empty($_POST["price"])) {
                                                                                                                                 echo $_POST["price"];
                                                                                                                             } ?>">
@@ -64,7 +64,7 @@ if (!empty($_POST["submitted"])) {
 
                 ?>
                 <div class="mt-5 flex space-x-6">
-                    <h2 class="font-bold">Genre : </h2>
+                    <h2 class="font-bold text-blue-800">Genre : </h2>
                     <?php foreach ($genreArray as $genre) : ?>
                         <div class="flex item-center space-x-3">
                             <label>
@@ -84,7 +84,7 @@ if (!empty($_POST["submitted"])) {
                     ?></p>
                 <!-- input for note -->
                 <div class="py-5">
-                    <label class="font-bold" for="note">Note : </label>
+                    <label class="font-bold text-blue-800" for="note">Note : </label>
                     <input type="number" step="0.1" name="note" class="input input-bordered w-full max-w-xs block" value="<?php if (!empty($_POST["note"])) {
                                                                                                                                 echo $_POST["note"];
                                                                                                                             } ?>">
@@ -107,7 +107,7 @@ if (!empty($_POST["submitted"])) {
                 ];
                 ?>
                 <div class="mt-5 flex space-x-6">
-                    <h2 class="font-bold">Plateformes : </h2>
+                    <h2 class="font-bold text-blue-800">Plateformes : </h2>
                     <?php foreach ($plateformArray as $plateform) : ?>
                         <div class="flex item-center space-x-3">
                             <label>
@@ -127,7 +127,7 @@ if (!empty($_POST["submitted"])) {
                     ?></p>
                 <!-- input for description -->
                 <div class="py-5 ">
-                    <label class="font-bold" for="description">Description : </label>
+                    <label class="font-bold text-blue-800" for="description">Description : </label>
                     <textarea name="description" class="textarea textarea-bordered block" cols="60" rows="5"></textarea>
                     <p>
                         <?php if (!empty($error["description"])) {
@@ -147,7 +147,7 @@ if (!empty($_POST["submitted"])) {
                 ]
                 ?>
                 <div class="py-5">
-                    <label class="font-bold" for="pegi">PEGI : </label>
+                    <label class="font-bold text-blue-800" for="pegi">PEGI : </label>
                     <select name="pegi" class="select select-bordered w-full max-w-xs">
                         <option disabled selected>Le PEGI de votre jeu</option>
                         <?php foreach ($pegiArray as $pegi) : ?>
@@ -164,6 +164,17 @@ if (!empty($_POST["submitted"])) {
                     <p>
                         <?php if (!empty($error["pegi"])) {
                             echo $error["pegi"];
+                        }
+                        ?></p>
+                </div>
+                <!-- upload img -->
+
+                <div>
+                    <label for="url_img" class="font-bold text-blue-800">Votre image : </label>
+                    <input type="file" class="block py-5 " id="url_img" name="url_img" >
+                    <p>
+                        <?php if (!empty($error["url_img"])) {
+                            echo $error["url_img"];
                         }
                         ?></p>
                 </div>

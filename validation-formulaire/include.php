@@ -1,4 +1,5 @@
 <?php
+require_once("input-upload.php");
 require_once("input-faille-xss.php");
 require_once("input-name.php");
 require_once("input-price.php");

@@ -1,6 +1,6 @@
 <?php
 //1-ecriture de la requete
-$sql = "INSERT INTO jeux(name, price, genre, note, plateforms, description, PEGI, created_at) VALUES(:name, :price, :genre, :note, :plateforms, :description, :PEGI, NOW())";
+$sql = "INSERT INTO jeux(name, price, genre, note, plateforms, description, PEGI, created_at, url_img) VALUES(:name, :price, :genre, :note, :plateforms, :description, :PEGI, NOW(), :url_img)";
 
 //2-prepare la requete
 $query = $pdo->prepare($sql);
@@ -13,6 +13,7 @@ $query->bindValue(':note', $note, PDO::PARAM_STMT);
 $query->bindValue(':plateforms', implode("|", $plateform_clear), PDO::PARAM_STR);
 $query->bindValue(':description', $description, PDO::PARAM_STR);
 $query->bindValue(':PEGI', $pegi, PDO::PARAM_STR);
+$query->bindValue(':url_img', $url_img, PDO::PARAM_STR);
 
 //4-Executer la requete
 $query->execute();
